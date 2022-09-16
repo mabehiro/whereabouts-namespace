@@ -1,0 +1,17 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan-conf-101
+  namespace: vendor-b
+spec: 
+  config: '{
+  "cniVersion": "0.3.1",
+  "name": "macvlan-conf-101",
+  "type": "macvlan",
+  "master": "enp10s0.101",
+  "mode": "bridge",
+  "ipam": {
+    "type": "whereabouts",
+    "range": "10.1.1.0/24"
+    }
+    }'

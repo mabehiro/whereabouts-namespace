@@ -1,0 +1,42 @@
+---
+apiVersion: nmstate.io/v1beta1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: worker02
+spec:
+  desiredState:
+    interfaces:
+
+    - name: enp10s0
+      type: ethernet
+      state: up
+
+    - description: Multustest
+      name: enp10s0.101
+      state: up
+      type: vlan
+      # ipv4:
+      #   address:
+      #   - ip: 192.168.101.101
+      #     prefix-length: 24
+      #   enabled: true
+      vlan:
+        base-iface: enp10s0
+        id: 101
+
+    - description: Multustest
+      name: enp10s0.102
+      state: up
+      type: vlan
+      # ipv4:
+      #   address:
+      #   - ip: 192.168.101.101
+      #     prefix-length: 24
+      #   enabled: true
+      vlan:
+        base-iface: enp10s0
+        id: 102
+
+  nodeSelector:
+    kubernetes.io/hostname: worker02 
+

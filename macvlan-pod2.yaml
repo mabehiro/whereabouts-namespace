@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+#  generateName: macvlan-
+  name: macvlan-10.1.1.202
+  labels:
+    app: multus-macvlan
+  annotations:
+    k8s.v1.cni.cncf.io/networks: '[
+            {
+              "name": "macvlan-conf-101",
+              "ips": [ "10.1.1.202/24" ]
+            },
+            {
+              "name": "macvlan-conf-102",
+              "ips": [ "10.1.2.202/24" ]
+            }
+    ]'
+spec:
+  containers:
+  - name: centos-tools
+    image: docker.io/centos/tools:latest
+    command:
+    - /sbin/init
+    securityContext:
+      privileged: true
